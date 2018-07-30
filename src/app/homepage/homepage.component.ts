@@ -1,0 +1,77 @@
+import { Component, OnInit } from '@angular/core';
+import { CusineService } from '../cusine.service';
+import { cusine } from './cusine_class';
+import { GetcusineService } from '../getcusine.service';
+import { cusine_dish } from './cusine_dish';
+
+@Component({
+  selector: 'app-homepage',
+  templateUrl: './homepage.component.html',
+  styleUrls: ['./homepage.component.css']
+})
+export class HomepageComponent implements OnInit {
+
+  constructor(private _cusine:CusineService,private _xyz:GetcusineService) { }
+cusine_arr:cusine[]=[];
+cusine_dish_arr:cusine_dish[]=[];
+bill:cusine_dish[]=[];
+qty:number[]=[];
+total:number=0;
+price:number[]=[];
+n:number[]=[
+  1,2,3,4,5,6,7,8,9,10
+];
+onclick(cusine_name:cusine[]){
+  this._xyz.getfoodbyName(cusine_name).subscribe(
+    (data:any[])=>{
+      this.cusine_dish_arr=data;
+      console.log(data);
+    }
+  );
+}
+onchange(item,i)
+{
+  if(this.qty[i]<=0){
+    this.qty[i]=1;
+    alert("Qty Cant be Zero")
+  }
+
+  this.total=this.total-this.price[i];
+    this.price[i]=this.qty[i]*item.dish_price;
+    this.total+=this.price[i];
+
+}
+onclickdiv(item:cusine_dish){
+    if(this.bill.find(x=>x.dish_id==item.dish_id))
+    {
+      alert("Already in cart")
+    }
+    else
+    {
+      this.bill.push(new cusine_dish(item.cusine_id,item.cusine_name,item.dish_id,item.dish_name,item.dish_price,item.dish_img,item.fk_cusine_id))
+      this.price.push(item.dish_price);
+      this.qty.push(1);
+      this.total=this.total+item.dish_price;
+    }
+  
+    
+}
+ondelclick(i)
+{
+  this.total-=this.price[i];
+  this.bill.splice(i,1);
+  this.price.splice(i,1);
+  this.qty.splice(i,1);
+  
+}
+  ngOnInit() {
+    this._cusine.getallcusine().subscribe(
+      (data:any[])=>{
+        this.cusine_arr=data;
+        console.log(data);
+      }
+    );
+    
+  }
+
+}

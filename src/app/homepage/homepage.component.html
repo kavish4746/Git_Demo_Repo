@@ -1,0 +1,63 @@
+<div class="navbar navbar-default">
+  <div class="row">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li *ngFor="let item of cusine_arr">
+            <button type="button" class="list-group-item" (click)="onclick(item.cusine_name)">{{item.cusine_name}}</button>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>
+   <div class="col-md-6">
+    <div class="row"> 
+  <div  *ngFor="let item of cusine_dish_arr"  class="col-sm-6 col-md-4">
+      
+      <div class="thumbnail">
+        <img src="{{item.dish_img}}" alt="..." height="200px" width="200px" >
+        <div class="caption">
+          <h3>{{item.dish_name}}</h3>
+          <p>{{item.dish_price}}</p>
+          <button  class="list-group-item" (click)="onclickdiv(item)">Add</button>
+        </div>
+      </div>
+      
+     </div>
+  </div>
+  
+</div>
+<div style="margin-left:900px;">
+  <h1>Customer Bill</h1>
+  <table  border=1>
+      <th>
+        NAME
+      </th>
+      <th>
+        PRICE
+      </th>
+      <th>
+        QTY
+      </th>
+      
+      <th>
+
+      </th>
+      <tr *ngFor="let item of bill;let i=index">
+          <td>{{item.dish_name}}</td>
+          <td>{{price[i]}}</td>
+          <td><select [(ngModel)]="qty[i]" (change)="onchange(item,i)">
+            <option *ngFor="let item of n" >
+                {{item}}
+            </option>
+            </select></td>
+         <!-- <td><input type="number" [(ngModel)]="qty[i]" (change)="onchange(item,i)"></td> -->
+         
+         <td><button (click)="ondelclick(i)">Delete</button></td>
+      </tr>
+      
+  </table>
+  <b>TOTAL:-</b>
+  <h3>{{total}}</h3>
+<button (click)="onclickcheckout(item)">CHECK OUT</button>
+</div>
+  
