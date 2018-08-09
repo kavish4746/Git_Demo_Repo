@@ -5,6 +5,12 @@
           <li *ngFor="let item of cusine_arr">
             <button type="button" class="list-group-item" (click)="onclick(item.cusine_name)">{{item.cusine_name}}</button>
           </li>
+          <li>
+            <button type="button" class="btn btn-primary" (click)="onclickpast(item)"><b>Past Order</b></button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-primary" (click)="onclicklogout()"><b>Log Out</b></button>
+          </li>
         </ul>
     </div>
   </div>
@@ -18,7 +24,7 @@
         <div class="caption">
           <h3>{{item.dish_name}}</h3>
           <p>{{item.dish_price}}</p>
-          <button  class="list-group-item" (click)="onclickdiv(item)">Add</button>
+          <button  class="list-group-item zoom" (click)="onclickdiv(item)">Add</button>
         </div>
       </div>
       
@@ -58,6 +64,7 @@
   </table>
   <b>TOTAL:-</b>
   <h3>{{total}}</h3>
-<button (click)="onclickcheckout(item)">CHECK OUT</button>
+  
+<button *ngIf="total!=0" (click)="onclickcheckout(item)">CHECK OUT</button>
 </div>
   

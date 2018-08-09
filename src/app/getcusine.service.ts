@@ -8,7 +8,7 @@ export class GetcusineService {
   private url:string="http://Localhost:3000/food/";
   constructor(private _xyz:HttpClient) { }
 
-  getfoodbyName(cuusine_name:cusine[]){
+  getfoodbyName(cuusine_name){
     return this._xyz.get(this.url+cuusine_name)
   }
 }

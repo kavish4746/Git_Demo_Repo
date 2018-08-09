@@ -1,0 +1,22 @@
+
+<div class="div1">
+  <table border="2">
+ <h1 class="a">Login</h1>
+ <div>
+   <label class="text">Email_id</label>&nbsp;&nbsp;
+   <input type="email" [(ngModel)]="user_id" placeholder="Enter Email_id" class="textbox"> 
+ </div>
+ <br>
+ <div>
+ <label class="text">Password</label>&nbsp;
+ <input type="password" [(ngModel)]="password" placeholder="Enter Password" class="textbox">
+ </div>
+ <br>
+ <br>
+ <div>
+   <button (click)="onLogin()" class="login">Login</button>
+ </div>
+ <br>
+</table> 
+
+</div>
